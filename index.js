@@ -24,9 +24,19 @@ async function run() {
         await client.connect();
         // console.log('DB new connected!!');
         const activitiesCollection = client.db('VolNetwork').collection('activities');
-        const activity = { name: "child shelter", email: "abc@def.com" };
-        const result = await activitiesCollection.insertOne(activity);
-        console.log(`activity inserted with id: ${result.insertedId}`);
+        // const activity = { name: "child shelter", email: "abc@def.com" };
+        // const result = await activitiesCollection.insertOne(activity);
+        // console.log(`activity inserted with id: ${result.insertedId}`);
+
+
+        //add a new user
+        app.post('/user', async (req, res) => {
+            const newUser = req.body;
+            console.log('adding new user ', newUser);
+            const result = await activitiesCollection.insertOne(newUser);
+            res.send(result);
+        });
+
     }
     finally {
 
